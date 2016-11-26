@@ -1,0 +1,16 @@
+{
+	"folders":
+	[
+		{
+			"path": "/home/tas/code/json"
+		}
+	],
+    "build_systems": 
+    [
+        {
+            "name": "Run tests",
+            "cmd": "scons",
+            "working_dir": "$project_path"
+        }
+    ]
+}
