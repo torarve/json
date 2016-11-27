@@ -1,0 +1,9 @@
+To setup build on a linux system:
+
+$ mkdir build
+$ cd build
+$ cmake ..
+
+To build and run tests from root folder:
+
+$ cmake --build build
