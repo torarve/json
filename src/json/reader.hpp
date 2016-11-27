@@ -68,7 +68,7 @@ private:
         current = lexer.next();
         while(current.type!=Type::EndOfFile && current.type!=Type::EndObject) {
             if(current.type==Type::String || current.type==Type::Identifier) {
-                auto name = current.stringValue;
+                auto name = std::move(current.stringValue);
                 current = lexer.next(); 
                 if(current.type!=Type::Colon)
                     throw std::runtime_error{"Expected colon after property name."};

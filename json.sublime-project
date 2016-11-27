@@ -8,8 +8,8 @@
     "build_systems": 
     [
         {
-            "name": "Run tests",
-            "cmd": "scons",
+            "name": "Debug",
+            "cmd": ["cmake", "--build", "ninja-debug"],
             "working_dir": "$project_path"
         }
     ]

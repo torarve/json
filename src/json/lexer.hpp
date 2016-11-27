@@ -38,13 +38,16 @@ public:
 
 private:
     // Check if end reached
-    inline bool eof() const { return iter==std::istreambuf_iterator<char>{}; }
+    inline bool eof() const {
+        constexpr std::istreambuf_iterator<char> end_of_file;
+        return iter==end_of_file;
+    }
     // Move to the next character
     inline char get() { ++iter; return current=*iter; }
     // skips any initial white space at the currrent location
     inline void skip_whitespace() {
-        std::istreambuf_iterator<char> end_of_file;
-        for(; iter!=end_of_file && std::isspace(current); get())
+        constexpr std::istreambuf_iterator<char> end_of_file;
+        for(; iter!=end_of_file && std::isspace(current); current=*(++iter))
             ;
     }
 

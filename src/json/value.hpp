@@ -114,6 +114,20 @@ namespace json {
             return *this;
         }
 
+        value & operator=(value && val) {
+            switch(val.type_) {
+                case Type::null: operator=(nullptr); break;
+                case Type::integer: operator=(val.intValue_); break;
+                case Type::real: operator=(val.realValue_); break;
+                case Type::boolean: operator=(val.boolValue_); break;
+                case Type::string: operator=(std::move(val.strValue_)); break;
+                case Type::array: operator=(std::move(val.arrValue_)); break;
+                case Type::object: operator=(std::move(val.objValue_)); break;
+            }
+
+            return *this;
+        }
+
 
         value & operator=(int val) {
             clear();
@@ -167,7 +181,7 @@ namespace json {
         }
 
 
-        value & operator=(array_t val) {
+        value & operator=(array_t && val) {
             if(type_==Type::array) {
                 arrValue_ = std::move(val);
             }
@@ -181,7 +195,7 @@ namespace json {
         }
 
 
-        value & operator=(object_t val) {
+        value & operator=(object_t && val) {
             if(type_==Type::object) {
                 objValue_ = std::move(val);
             }

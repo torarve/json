@@ -27,77 +27,77 @@ public:
     Token() : type{Type::StartOfFile} {}
 
     // Create start array token.
-    static Token startArray() {
+    static inline Token startArray() {
         return Type::StartArray;
     }
 
     // Create end array token.
-    static Token endArray() {
+    static inline Token endArray() {
         return Type::EndArray;
     }
 
     // create start object oken.
-    static Token startObject() {
+    static inline Token startObject() {
         return Type::StartObject;
     }
 
     // Create end of object token
-    static Token endObject() {
+    static inline Token endObject() {
         return Type::EndObject;
     }
 
     // Create comma token
-    static Token comma() {
+    static inline Token comma() {
         return Type::Comma;
     }
 
     // Create colon token.
-    static Token colon() {
+    static inline Token colon() {
         return Type::Colon;
     }
 
     // Create end-of-file token
-    static Token eof() {
+    static inline Token eof() {
         return Type::EndOfFile;
     }
 
     // Create null token
-    static Token nullValue() {
+    static inline Token nullValue() {
         return Type::Null;
     }
 
     // Create floating point token with the given value.
-    static Token floatingPoint(double val) {
+    static inline Token floatingPoint(double val) {
         return val;
     }
     
     // Create integer token with the given value.
-    static Token integer(int val) {
+    static inline Token integer(int val) {
         return val;
     }
 
     // Create boolean token with the given value.
-    static Token boolean(bool val) {
+    static inline Token boolean(bool val) {
         return val;
     }
 
     // Create string token with the given value
-    static Token string(std::string && str) {
+    static inline Token string(std::string && str) {
         return {Type::String, std::move(str)};
     }
 
     // Create string token with the given value
-    static Token string(const char * val) {
+    static inline Token string(const char * val) {
         return {Type::String, val};
     }
 
     // Create identifier token with the given name
-    static Token identifier(std::string && name) {
+    static inline Token identifier(std::string && name) {
         return {Type::Identifier, std::move(name)};
     }
 
     // Create identifier token with the given name
-    static Token identifier(const char * val) {
+    static inline Token identifier(const char * val) {
         return {Type::Identifier, val};
     }
 
@@ -140,7 +140,8 @@ public:
         }
     }
 
-    Token & operator=(Token other) {
+
+    Token & operator=(Token && other) {
         using string = std::string;
         if(hasStringValue() && other.hasStringValue()) {
             stringValue = std::move(other.stringValue);
@@ -194,7 +195,7 @@ public:
     }
 
 private:
-    bool hasStringValue() const {
+    bool inline hasStringValue() const {
         return type==Type::String || type==Type::Identifier;
     }
 
